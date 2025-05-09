@@ -1,0 +1,41 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one_one_user:
+  content: Hello, how are you?
+  role: user
+  chat: one
+
+one_one_assistant:
+  content: I'm fine, thank you!
+  role: assistant
+  chat: one
+
+one_two_user:
+  content: What is the weather in Tokyo?
+  role: user
+  chat: one
+
+one_two_assistant:
+  content: It's sunny and warm in Tokyo.
+  role: assistant
+  chat: one
+
+two_one_user:
+  content: What is the capital of France?
+  role: user
+  chat: two
+
+two_one_assistant:
+  content: The capital of France is Paris.
+  role: assistant
+  chat: two
+
+two_two_user:
+  content: What is the capital of Japan?
+  role: user
+  chat: two
+
+two_two_assistant:
+  content: The capital of Japan is Tokyo.
+  role: assistant
+  chat: two
