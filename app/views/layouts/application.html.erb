@@ -22,7 +22,9 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="flex flex-col bg-gray-900 text-white">
+    <main class="flex-1 p-8">
+      <%= yield %>
+    </main>
   </body>
 </html>
