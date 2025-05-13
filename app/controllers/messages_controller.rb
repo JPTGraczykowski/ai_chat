@@ -1,21 +1,28 @@
 class MessagesController < ApplicationController
   def create
-    @chat = Chat.find(params[:chat_id])
-    @message = @chat.messages.new(message_params)
+    @message = Message.new(message_params)
     @message.role = "user"
+    @chat = @message.chat
 
     if @message.save
       response_service = Messages::Respond.new(@chat, @message)
       response_service.call
-      redirect_to @chat
+
+      @ai_message = response_service.ai_message
+
+      respond_to do |format|
+        format.turbo_stream
+        format.html { redirect_to @chat }
+      end
     else
-      render :new, status: :unprocessable_entity
+      @messages = @chat.messages
+      render "chats/show", status: :unprocessable_entity
     end
   end
 
   private
 
   def message_params
-    params.require(:message).permit(:content)
+    params.require(:message).permit(:chat_id, :content)
   end
 end

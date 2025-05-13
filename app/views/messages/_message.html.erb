@@ -1,0 +1,16 @@
+<div class="<%= message.role == 'user' ? 'ml-8' : 'mr-8' %>">
+  <div class="flex items-center mb-2">
+    <div class="w-8 h-8 flex-shrink-0 rounded-full <%= message.role == 'user' ? 'bg-blue-800' : 'bg-green-700' %> flex items-center justify-center mr-2">
+      <%= message.role == 'user' ? '👤' : '🤖' %>
+    </div>
+    <div class="text-sm font-medium">
+      <%= message.role == 'user' ? 'You' : 'Assistant' %>
+    </div>
+  </div>
+  <div class="bg-gray-900 rounded-lg p-3 mb-1 border border-gray-700">
+    <%= simple_format message.content %>
+  </div>
+  <div class="text-xs text-gray-500 pl-3">
+    <%= time_ago_in_words(message.created_at) %> ago
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<%= form_with model: message,
+              class: "space-y-4",
+              id: "message_form",
+              data: { controller: 'chat', action: "submit->chat#messageAdded" } do |form| %>
+  <% if message.errors.any? %>
+    <div class="bg-red-900/50 text-red-200 p-3 rounded mb-4">
+      <h2 class="text-lg font-medium mb-2"><%= pluralize(message.errors.count, "error") %> prevented this message from being sent:</h2>
+      <ul class="list-disc pl-5">
+        <% message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.hidden_field :chat_id, value: chat.id %>
+    <%= form.label :content, "Your message:", class: "block text-sm font-medium mb-2" %>
+    <%= form.text_area :content,
+                        rows: 3,
+                        class: "w-full bg-gray-900 border border-gray-700 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent",
+                        placeholder: "Type your message here..." %>
+  </div>
+
+  <div class="pt-1">
+    <%= form.submit "Send",
+                    class: "py-2 px-4 bg-green-700 rounded cursor-pointer transition hover:bg-green-600" %>
+  </div>
+<% end %>

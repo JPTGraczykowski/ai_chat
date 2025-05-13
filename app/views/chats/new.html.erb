@@ -1,0 +1,32 @@
+<% content_for :title, "New Chat" %>
+
+<div class="max-w-3xl mx-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold">New Chat</h1>
+    <%= link_to "Back to Chats", chats_path, class: "py-2 px-4 bg-gray-700 rounded transition hover:bg-gray-600" %>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+    <%= form_with(model: @chat, class: "space-y-4") do |form| %>
+      <% if @chat.errors.any? %>
+        <div class="bg-red-900/50 text-red-200 p-3 rounded mb-4">
+          <h2 class="text-lg font-medium mb-2"><%= pluralize(@chat.errors.count, "error") %> prevented this chat from being saved:</h2>
+          <ul class="list-disc pl-5">
+            <% @chat.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div>
+        <%= form.label :title, class: "block text-sm font-medium mb-1" %>
+        <%= form.text_field :title, class: "w-full bg-gray-900 border border-gray-700 rounded p-2 focus:outline-none focus:ring-2 focus:ring-green-600 focus:border-transparent", placeholder: "Enter a title for your conversation" %>
+      </div>
+
+      <div class="pt-2">
+        <%= form.submit "Create Chat", class: "py-2 px-4 bg-green-700 rounded cursor-pointer transition hover:bg-green-600" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,6 +1,6 @@
 module Messages
   class Respond
-    attr_reader :success
+    attr_reader :success, :ai_message
 
     def initialize(chat, prompt_message)
       @chat = chat
@@ -9,12 +9,12 @@ module Messages
     end
 
     def call
-      message = @chat.messages.new(
+      @ai_message = @chat.messages.new(
         content: "AI Response placeholder",
         role: "assistant"
       )
 
-      @success = message.save
+      @success = @ai_message.save
     end
   end
 end

@@ -1,31 +1,33 @@
 <% content_for :title, "Your Chats" %>
 
-<div class="flex justify-between items-center mb-5">
-  <h1 class="text-2xl font-bold">Your Chats</h1>
-  <%= link_to "New Chat", new_chat_path, class: "py-2 px-4 bg-green-700 rounded transition hover:bg-green-600" %>
-</div>
+<div class="max-w-3xl mx-auto" >
+  <div class="flex justify-between items-center mb-5">
+    <h1 class="text-2xl font-bold">Your Chats</h1>
+    <%= link_to "New Chat", new_chat_path, class: "py-2 px-4 bg-green-700 rounded transition hover:bg-green-600" %>
+  </div>
 
-<% if @chats.any? %>
-  <div class="grid grid-cols-auto-fill gap-4">
-    <% @chats.each do |chat| %>
-      <%= link_to chat_path(chat), class: "block p-4 bg-gray-800 border border-gray-700 rounded transition hover:bg-gray-700" do %>
-        <h3 class="font-semibold text-lg truncate text-light"><%= chat.title %></h3>
-        <p class="text-gray-400 text-sm mt-2">
-          <%= pluralize(chat.messages.count, 'message') %>
-          <span class="text-gray-500 ml-2">
-            <%= time_ago_in_words(chat.updated_at) %> ago
-          </span>
-        </p>
+  <% if @chats.any? %>
+    <div class="grid grid-cols-auto-fill gap-4">
+      <% @chats.each do |chat| %>
+        <%= link_to chat_path(chat), class: "block p-4 bg-gray-800 border border-gray-700 rounded transition hover:bg-gray-700" do %>
+          <h3 class="font-semibold text-lg truncate text-light"><%= chat.title %></h3>
+          <p class="text-gray-400 text-sm mt-2">
+            <%= pluralize(chat.messages.count, 'message') %>
+            <span class="text-gray-500 ml-2">
+              <%= time_ago_in_words(chat.updated_at) %> ago
+            </span>
+          </p>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
-<% else %>
-  <div class="text-center py-12 bg-gray-800 border border-gray-700 rounded">
-    <div class="w-12 h-12 mx-auto text-gray-500 mb-4">
-      💬
     </div>
-    <h3 class="text-xl font-medium mb-2">No chats yet</h3>
-    <p class="text-gray-300 mb-6">Start a new conversation to begin chatting</p>
-    <%= link_to "Start Chat", new_chat_path, class: "py-2.5 px-5 bg-green-700 rounded transition hover:bg-green-600" %>
-  </div>
-<% end %>
+  <% else %>
+    <div class="text-center py-12 bg-gray-800 border border-gray-700 rounded">
+      <div class="w-12 h-12 mx-auto text-gray-500 mb-4">
+        💬
+      </div>
+      <h3 class="text-xl font-medium mb-2">No chats yet</h3>
+      <p class="text-gray-300 mb-6">Start a new conversation to begin chatting</p>
+      <%= link_to "Start Chat", new_chat_path, class: "py-2.5 px-5 bg-green-700 rounded transition hover:bg-green-600" %>
+    </div>
+  <% end %>
+</div>

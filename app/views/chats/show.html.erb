@@ -1,0 +1,37 @@
+<% content_for :title, @chat.title %>
+
+<div class="max-w-3xl mx-auto" data-controller="chat">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold truncate"><%= @chat.title %></h1>
+    <%= link_to "Back to Chats", chats_path, class: "py-2 px-4 bg-gray-700 rounded transition hover:bg-gray-600" %>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg border border-gray-700 mb-6">
+    <div class="p-4 border-b border-gray-700 flex justify-between items-center">
+      <div class="text-sm text-gray-400">
+        Started <%= time_ago_in_words(@chat.created_at) %> ago
+      </div>
+      <div class="text-sm text-gray-400">
+        <%= pluralize(@chat.messages.count, 'message') %>
+      </div>
+    </div>
+
+    <div class="p-4 space-y-4 max-h-[60vh] overflow-y-auto" id="messages">
+      <% if @messages.any? %>
+        <% @messages.each do |message| %>
+          <%= render message %>
+        <% end %>
+      <% else %>
+        <div class="text-center py-8 text-gray-400">
+          No messages yet. Start the conversation below.
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="bg-gray-800 rounded-lg p-6 border border-gray-700">
+    <h2 class="text-lg font-medium mb-4">Send a message</h2>
+
+    <%= render "messages/form", message: @message, chat: @chat %>
+  </div>
+</div>
