@@ -1,0 +1,5 @@
+<%= turbo_stream.remove "ai-loading" %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render message %>
+<% end %>

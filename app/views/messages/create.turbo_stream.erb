@@ -1,3 +1,11 @@
+<%= turbo_stream.append "messages" do %>
+  <%= render @message %>
+<% end %>
+
+<%= turbo_stream.append "messages" do %>
+  <%= render "messages/ai_loading" %>
+<% end %>
+
 <%= turbo_stream.replace "message_form" do %>
   <%= render "messages/form", message: Message.new, chat: @chat %>
 <% end %>

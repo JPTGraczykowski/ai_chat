@@ -37,16 +37,28 @@ class AiResponseJob < ApplicationJob
 
       @response ||= "I'm sorry, I couldn't generate a proper response."
 
-      @chat.messages.create(
+      response_message = @chat.messages.create(
         role: "assistant",
         content: @response
+      )
+
+      Turbo::StreamsChannel.broadcast_render_to(
+        [@chat, :messages],
+        partial: "messages/ai_response",
+        locals: { message: response_message }
       )
     rescue => e
       puts "Error in AI Response Job: #{e.message}"
 
-      @chat.messages.create(
+      error_message = @chat.messages.create(
         role: "assistant",
         content: "I'm sorry, I couldn't respond to that at this time."
+      )
+
+      Turbo::StreamsChannel.broadcast_render_to(
+        [@chat, :messages],
+        partial: "messages/ai_response",
+        locals: { message: error_message }
       )
     end
   end
