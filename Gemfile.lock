@@ -434,6 +434,7 @@ DEPENDENCIES
   brakeman
   capybara
   debug
+  dotenv
   gemini-ai (~> 4.2.0)
   importmap-rails
   jbuilder

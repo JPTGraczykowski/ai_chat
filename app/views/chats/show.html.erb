@@ -1,5 +1,7 @@
 <% content_for :title, @chat.title %>
 
+<%= turbo_stream_from @chat, :messages %>
+
 <div class="max-w-3xl mx-auto" data-controller="chat">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold truncate"><%= @chat.title %></h1>

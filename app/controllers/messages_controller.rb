@@ -5,10 +5,7 @@ class MessagesController < ApplicationController
     @chat = @message.chat
 
     if @message.save
-      response_service = Messages::Respond.new(@chat, @message)
-      response_service.call
-
-      @ai_message = response_service.ai_message
+      AiResponseJob.perform_later(@chat, @message.content)
 
       respond_to do |format|
         format.turbo_stream
