@@ -18,7 +18,7 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 gem "tailwindcss-ruby", "~> 4.1"
-gem "tailwindcss-rails", "~> 4.2"
+gem "tailwindcss-rails", "~> 4.3"
 gem "gemini-ai", "~> 4.2.0"
 
 group :development, :test do
